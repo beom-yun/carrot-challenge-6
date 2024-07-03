@@ -15,14 +15,20 @@ export default function LoginInput({
 }: LoginInputProps) {
   return (
     <div className="flex w-full flex-col gap-2">
-      <div className="flex w-full items-center gap-4 rounded-full px-5 text-gray-500 ring-1 ring-gray-400">
-        {icon}
-        <input
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          className="h-11 w-full outline-none"
-        />
+      <div
+        className={`rounded-full ring-offset-4 transition-all has-[:focus]:ring-1 ${errors ? "ring-red-500" : "ring-gray-400"}`}
+      >
+        <div
+          className={`flex w-full items-center gap-4 rounded-full px-5 text-gray-500 ring-1 ${errors ? "ring-red-500" : "ring-gray-300"}`}
+        >
+          {icon}
+          <input
+            name={name}
+            type={type}
+            placeholder={placeholder}
+            className="h-11 w-full outline-none"
+          />
+        </div>
       </div>
       {errors?.map((error, index) => (
         <span key={index} className="px-5 text-sm text-red-500">

@@ -12,6 +12,7 @@ import {
 import { useFormState } from "react-dom";
 import loginAction from "./actions";
 import LoginInput from "@/components/login-input";
+import Toast from "@/components/toast";
 
 export default function Home() {
   const [state, dispatch] = useFormState(loginAction, null);
@@ -46,6 +47,7 @@ export default function Home() {
         errors={state?.errors}
       />
       <LoginButton />
+      {state?.success ? <Toast /> : null}
     </form>
   );
 }
