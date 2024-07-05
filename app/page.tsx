@@ -29,22 +29,24 @@ export default function Home() {
       </div>
       <LoginInput
         name="email"
-        type="email"
+        type="text"
         placeholder="Email"
         icon={<EnvelopeIcon className="size-4" />}
+        errors={state?.fieldErrors.email}
       />
       <LoginInput
         name="username"
         type="text"
         placeholder="Username"
         icon={<UserIcon className="size-4" />}
+        errors={state?.fieldErrors.username}
       />
       <LoginInput
         name="password"
-        type="text"
+        type="password"
         placeholder="Password"
         icon={<KeyIcon className="size-4" />}
-        errors={state?.errors}
+        errors={state?.fieldErrors.password}
       />
       <LoginButton />
       {state?.success ? <Toast /> : null}
