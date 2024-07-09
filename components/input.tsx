@@ -6,7 +6,7 @@ interface LoginInputProps {
   errors?: string[];
 }
 
-export default function LoginInput({
+export default function Input({
   name,
   type,
   placeholder,
