@@ -6,6 +6,7 @@ import {
   UserIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function getUser() {
@@ -50,11 +51,19 @@ export default async function ProfilePage() {
           <span>{user.bio}</span>
         </div>
       </div>
-      <form action={logOut}>
-        <button className="rounded-xl bg-red-500 px-5 py-3 text-white transition-all hover:bg-red-400 active:scale-95">
-          Log Out
-        </button>
-      </form>
+      <div className="flex items-center gap-5">
+        <Link
+          href="/"
+          className="rounded-xl bg-cyan-500 px-5 py-3 text-white transition-all hover:bg-cyan-400 active:scale-95"
+        >
+          Go Tweets!
+        </Link>
+        <form action={logOut}>
+          <button className="rounded-xl bg-red-500 px-5 py-3 text-white transition-all hover:bg-red-400 active:scale-95">
+            Log Out
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

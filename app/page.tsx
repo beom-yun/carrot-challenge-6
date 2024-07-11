@@ -1,33 +1,33 @@
-import { CommandLineIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import TweetList from "@/components/tweet-list";
+import { PAGE_SIZE } from "@/lib/constants";
+import db from "@/lib/db";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  EnvelopeOpenIcon,
+} from "@heroicons/react/24/outline";
+import { Prisma } from "@prisma/client";
 
-export default function HomePage() {
+async function getInitialTweets() {
+  const tweets = await db.tweet.findMany({
+    include: { user: { select: { username: true } } },
+    orderBy: { created_at: "desc" },
+    take: PAGE_SIZE,
+  });
+  return tweets;
+}
+
+export type InitialTweets = Prisma.PromiseReturnType<typeof getInitialTweets>;
+
+export default async function RootPage() {
+  const initialTweets = await getInitialTweets();
+
   return (
     <div className="flex h-screen flex-col items-center justify-center gap-5 pb-20">
-      <CommandLineIcon className="size-14 text-red-500" />
-      <span className="text-4xl font-bold">Carrot Challenge</span>
-      <p className="text-center">
-        {`Used by some of the world's largest companies, `}
-        <a href="https://nomadcoders.co/" className="font-bold underline">
-          Nomadcoders
-        </a>
-        {` enables you to
-        create high-quality web applications with the power of React components.`}
-      </p>
-      <div className="flex gap-5">
-        <Link
-          href="/log-in"
-          className="rounded-xl border-2 px-5 py-3 transition-all hover:bg-gray-100 active:scale-95"
-        >
-          Log In
-        </Link>
-        <Link
-          href="/create-account"
-          className="rounded-xl bg-red-500 px-5 py-3 text-white transition-all hover:bg-red-400 active:scale-95"
-        >
-          Create Account
-        </Link>
-      </div>
+      <EnvelopeOpenIcon className="mb-5 size-14 text-red-500" />
+      <span className="mb-5 text-4xl font-bold">Tweets!</span>
+
+      <TweetList initialTweets={initialTweets} />
     </div>
   );
 }
