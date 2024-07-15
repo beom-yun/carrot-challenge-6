@@ -1,11 +1,8 @@
+import AddTweet from "@/components/add-tweet";
 import TweetList from "@/components/tweet-list";
 import { PAGE_SIZE } from "@/lib/constants";
 import db from "@/lib/db";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  EnvelopeOpenIcon,
-} from "@heroicons/react/24/outline";
+import { EnvelopeOpenIcon } from "@heroicons/react/24/outline";
 import { Prisma } from "@prisma/client";
 
 async function getInitialTweets() {
@@ -26,6 +23,8 @@ export default async function RootPage() {
     <div className="flex h-screen flex-col items-center justify-center gap-5 pb-20">
       <EnvelopeOpenIcon className="mb-5 size-14 text-red-500" />
       <span className="mb-5 text-4xl font-bold">Tweets!</span>
+
+      <AddTweet />
 
       <TweetList initialTweets={initialTweets} />
     </div>
